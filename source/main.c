@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
     // Other initialization goes here. As a demonstration, we print hello world.
     printf("Hello World!\n");
     int aPresses = 0;
+    int framesSinceLast = 0;
 
     // Main loop
     while (appletMainLoop())
@@ -29,17 +30,22 @@ int main(int argc, char* argv[])
         // hidKeysDown returns information about which buttons have been
         // just pressed in this frame compared to the previous one
         u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+        
 
-        if (kDown & KEY_PLUS)
-            break; // break in order to return to hbmenu
+        // if (p2kDown & KEY_PLUS) {
+        //     printf("A presses: %d\n", aPresses);
+        // }
+            // break; // break in order to return to hbmenu
 
         // Your code goes here
         if (kDown & KEY_A) {
-            printf("A press # %d\n", ++aPresses);
+            printf("A press #%d - frames since last a press #%d\n", ++aPresses, framesSinceLast);
+            framesSinceLast = 0;
         }
 
         // Update the console, sending a new frame to the display
         consoleUpdate(NULL);
+        framesSinceLast++;
     }
 
     // Deinitialize and clean up resources used by the console (important!)
