@@ -59,6 +59,8 @@ int main(int argc, char **argv)
     // }
 
     int aPresses = 0;
+    int frames = 0;
+    bool started = false;
 
     // Main loop
     while(appletMainLoop())
@@ -66,12 +68,38 @@ int main(int argc, char **argv)
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
 
-        // Your code goes here
-
         //hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
         u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 
-        if (kDown & KEY_A) printf("A press #%d\n", ++aPresses);
+        // check for ABXY pressed, then start counting
+        if (!started) {
+            if (kDown & KEY_A) {
+                printf("A");
+                if (kDown & KEY_B) {
+                    printf("B");
+                    if (kDown & KEY_X) {
+                        printf("X");
+                        if (kDown & KEY_Y) {
+                            printf("Y\n");
+                            started = true;
+                        }
+                    }
+                }
+            }
+        } else {
+            if (kDown & KEY_A) {
+                printf("Frame #%d -- A press #%d\n", ++frames, ++aPresses);
+
+                // if we did 30 of them we're done
+                if (aPresses >= 30) {
+                    started = false;
+                    aPresses = 0;
+                    frames = 0;
+                }
+            } else {
+                printf("Frame #%d\n", ++frames);
+            }
+        }
 
         if (kDown & KEY_PLUS) break; // break in order to return to hbmenu
 
