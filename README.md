@@ -1,4 +1,4 @@
-# nx-tas-tester
+# nxTASter
 The goal of this will be to test input against nx-tas scripts
 
 I think the basic idea will be:

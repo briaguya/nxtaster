@@ -1,4 +1,4 @@
-main.o: /Users/briaguya/code/nx-tas-tester/source/main.c \
+main.o: /Users/briaguya/code/nxtaster/source/main.c \
  /opt/devkitpro/libnx/include/switch.h \
  /opt/devkitpro/libnx/include/switch/types.h \
  /opt/devkitpro/libnx/include/switch/result.h \

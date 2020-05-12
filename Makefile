@@ -37,7 +37,7 @@ include $(DEVKITPRO)/libnx/switch_rules
 #   of a homebrew executable (.nro). This is intended to be used for sysmodules.
 #   NACP building is skipped as well.
 #---------------------------------------------------------------------------------
-APP_TITLE	:=	nx-TASter
+APP_TITLE	:=	nxTASter
 APP_AUTHOR  :=	briaguya
 APP_VERSION :=  0.0.1
 TARGET		:=	$(notdir $(CURDIR))

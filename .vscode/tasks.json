@@ -6,7 +6,7 @@
         {
             "label": "make and send to main",
             "type": "shell",
-            "command": "make -j8 && nxlink -p nxtaster/nxtaster.nro -a 192.168.10.13 out/*.nro",
+            "command": "make -j8 && nxlink -p nxtaster/nxtaster.nro -a 192.168.7.30 nxtaster.nro",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -23,7 +23,7 @@
         {
             "label": "make and debug",
             "type": "shell",
-            "command": "make -j8 && nxlink -p nxtaster/nxtaster.nro -a 192.168.10.13 out/*.nro -s",
+            "command": "make -j8 && nxlink -p nxtaster/nxtaster.nro -a 192.168.7.30 nxtaster.nro -s",
             "group": {
                 "kind": "build",
                 "isDefault": true
