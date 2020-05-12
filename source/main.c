@@ -18,6 +18,7 @@ int main(int argc, char* argv[])
 
     // Other initialization goes here. As a demonstration, we print hello world.
     printf("Hello World!\n");
+    int aPresses = 0;
 
     // Main loop
     while (appletMainLoop())
@@ -33,6 +34,9 @@ int main(int argc, char* argv[])
             break; // break in order to return to hbmenu
 
         // Your code goes here
+        if (kDown & KEY_A) {
+            printf("A press # %d\n", ++aPresses);
+        }
 
         // Update the console, sending a new frame to the display
         consoleUpdate(NULL);
