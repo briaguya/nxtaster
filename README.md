@@ -6,15 +6,10 @@ The goal of this will be to test input against nx-tas scripts
 2. Once that input is recieved, P1's controller is polled and the input formatted and output to the [deko console](https://github.com/switchbrew/switch-examples/tree/master/graphics/deko3d/deko_console)
 
 ## Testing with [nx-TAS](https://github.com/hamhub7/nx-TAS)
-### Copy [script1.txt](/script1.txt) to the nx-TAS [scripts folder](https://github.com/hamhub7/nx-TAS#scripts) on your sd card
-
-### Make sure the nx-TAS sysmodule is running
-![Opening sysmodule tesla overlay, enabling nx-TAS](/docs/turnonnxtas.gif)
-
-### Attach an nx-TAS virtual controller as P1
+* Copy [script1.txt](/script1.txt) to the nx-TAS [scripts folder](https://github.com/hamhub7/nx-TAS#scripts) on your sd card
+* Attach an nx-TAS virtual controller as P1
 ![Adding virtual controller on change grip/order screen](/docs/addcontroller.gif)
-
-### Open nxTASter and use nx-TAS to run [script1.txt](/script1.txt)
+* Open nxTASter and use nx-TAS to run [script1.txt](/script1.txt)
 ![Opening nxTASter from homebrew menu, running script1 with nx-TAS virtual controller](/docs/runtest.gif)
 
 ## What about script2.txt?
