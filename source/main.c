@@ -8,40 +8,18 @@ int main(int argc, char **argv)
     consoleInit(NULL);
 
     // clear screen and home cursor
-    printf( CONSOLE_ESC(2J) );
+    printf(CONSOLE_ESC(2J));
+    bool running = false;
+    // #define CONSOLE_RED     CONSOLE_ESC(31;1m)
+    int currentConsoleColor = 31;
+    int currentLinePosition = 0;
 
-    // Set print co-ordinates
-    // /x1b[row;columnH
-    // printf(CONSOLE_ESC(42;37m));
-    // printf(CONSOLE_ESC( 7;4H) "%s", "     _      _        ____      _ ");
-    // printf(CONSOLE_ESC( 8;4H) "%s", "    | |    | |      |___ \\    | |");
-    // printf(CONSOLE_ESC( 9;4H) "%s", "  __| | ___| | _____  __) | __| |");
-    // printf(CONSOLE_ESC(10;4H) "%s", " / _` |/ _ \\ |/ / _ \\|__ < / _` |");
-    // printf(CONSOLE_ESC(11;4H) "%s", "| (_| |  __/   < (_) |__) | (_| |");
-    // printf(CONSOLE_ESC(12;4H) "%s", " \\__,_|\\___|_|\\_\\___/____/ \\__,_|");
-    // printf(CONSOLE_ESC(0m));
+    // todo: disconnect controllers here if we can
 
-    // // move cursor up
-    // // /x1b[linesA
-    // printf(CONSOLE_ESC(10A)"Line 0");
-
-    // // move cursor left
-    // // /x1b[columnsD
-    // printf(CONSOLE_ESC(28D)"Column 0");
-
-    // // move cursor down
-    // // /x1b[linesB
-    // printf(CONSOLE_ESC(19B)"Line 19");
-
-    // // move cursor right
-    // // /x1b[columnsC
-    // printf(CONSOLE_ESC(5C)"Column 20");
-
-    // printf("\n");
-
-    // // Color codes and attributes
+    //     // Color codes and attributes
     // for(int i=0; i<8; i++)
     // {
+    //     printf(%1$dm);
     //     printf(    CONSOLE_ESC(%1$dm) /* Set color */
     //             "Default "
     //             CONSOLE_ESC(1m) "Bold "
@@ -58,12 +36,23 @@ int main(int argc, char **argv)
     //             , i + 30);
     // }
 
-    int aPresses = 0;
-    int frames = 0;
-    bool started = false;
+    //         #define CONSOLE_RESET   CONSOLE_ESC(0m)
+    // #define CONSOLE_BLACK   CONSOLE_ESC(30m)
+    // #define CONSOLE_RED     CONSOLE_ESC(31;1m)
+    // #define CONSOLE_GREEN   CONSOLE_ESC(32;1m)
+    // #define CONSOLE_YELLOW  CONSOLE_ESC(33;1m)
+    // #define CONSOLE_BLUE    CONSOLE_ESC(34;1m)
+    // #define CONSOLE_MAGENTA CONSOLE_ESC(35;1m)
+    // #define CONSOLE_CYAN    CONSOLE_ESC(36;1m)
+    // #define CONSOLE_WHITE
+
+    // 
+    printf(CONSOLE_WHITE CONSOLE_ESC(1m));
+    printf("nxTASter v0.0.1\n");
+    printf("Press LSTICK+RSTICK on P1 to start/stop reading inputs\n\n");
 
     // Main loop
-    while(appletMainLoop())
+    while (appletMainLoop())
     {
         //Scan all the inputs. This should be done once for each frame
         hidScanInput();
@@ -71,37 +60,126 @@ int main(int argc, char **argv)
         //hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
         u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 
-        // check for ABXY pressed, then start counting
-        if (!started) {
+        if (running) {
+            // If we're at the last color loop back to red
+            if (currentConsoleColor == 37) {
+                currentConsoleColor = 31;
+            }
+
+            if (currentLinePosition == 5) {
+                printf("\n");
+                currentLinePosition = 0;
+            }
+            
+            printf(CONSOLE_ESC(%1$dm) CONSOLE_ESC(1m), currentConsoleColor);
+
+            printf(" ");
+            // todo: eat this copypasta
             if (kDown & KEY_A) {
                 printf("A");
-                if (kDown & KEY_B) {
-                    printf("B");
-                    if (kDown & KEY_X) {
-                        printf("X");
-                        if (kDown & KEY_Y) {
-                            printf("Y\n");
-                            started = true;
-                        }
-                    }
-                }
-            }
-        } else {
-            if (kDown & KEY_A) {
-                printf("Frame #%d -- A press #%d\n", ++frames, ++aPresses);
-
-                // if we did 30 of them we're done
-                if (aPresses >= 30) {
-                    started = false;
-                    aPresses = 0;
-                    frames = 0;
-                }
             } else {
-                printf("Frame #%d\n", ++frames);
-            }
+                printf(" ");
+            };
+
+            if (kDown & KEY_B) {
+                printf("B");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_X) {
+                printf("X");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_Y) {
+                printf("Y");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_L) {
+                printf("L");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_ZL) {
+                printf("\\");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_R) {
+                printf("R");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_ZR) {
+                printf("/");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_PLUS) {
+                printf("+");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_MINUS) {
+                printf("-");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_DLEFT) {
+                printf("<");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_DUP) {
+                printf("^");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_DRIGHT) {
+                printf(">");
+            } else {
+                printf(" ");
+            };
+
+            if (kDown & KEY_DDOWN) {
+                printf("v");
+            } else {
+                printf(" ");
+            };
+
+            currentConsoleColor++;
+            currentLinePosition++;
         }
 
-        if (kDown & KEY_PLUS) break; // break in order to return to hbmenu
+        if (!running && (kDown & KEY_PLUS))
+            break; // break in order to return to hbmenu
+
+        // Check for both stick clicks press to start/stop
+        if ((kDown & KEY_LSTICK) && (kDown & KEY_RSTICK)) {
+            if (running) {
+                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
+                printf("\nStopped reading input from P1\n");
+                running = false;
+                currentLinePosition = 0;
+
+            } else {
+                running = true;
+                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
+                printf("Started reading input from P1\n");
+            }
+        }
 
         consoleUpdate(NULL);
     }
