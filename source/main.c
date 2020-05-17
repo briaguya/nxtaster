@@ -60,21 +60,6 @@ int main(int argc, char **argv)
         //hidKeysDown returns information about which buttons have been just pressed (and they weren't in the previous frame)
         u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
 
-        // Check for both stick clicks press to start/stop
-        if ((kDown & KEY_LSTICK) && (kDown & KEY_RSTICK)) {
-            if (running) {
-                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
-                printf("\nStopped reading input from P1\n");
-                running = false;
-                currentLinePosition = 0;
-
-            } else {
-                running = true;
-                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
-                printf("Started reading input from P1\n");
-            }
-        }
-
         if (running) {
             // If we're at the last color loop back to red
             if (currentConsoleColor == 37) {
@@ -87,23 +72,6 @@ int main(int argc, char **argv)
             }
             
             printf(CONSOLE_ESC(%1$dm) CONSOLE_ESC(1m), currentConsoleColor);
-
-    // KEY_A            = BIT(0),       ///< A
-    // KEY_B            = BIT(1),       ///< B
-    // KEY_X            = BIT(2),       ///< X
-    // KEY_Y            = BIT(3),       ///< Y
-    // KEY_LSTICK       = BIT(4),       ///< Left Stick Button
-    // KEY_RSTICK       = BIT(5),       ///< Right Stick Button
-    // KEY_L            = BIT(6),       ///< L
-    // KEY_R            = BIT(7),       ///< R
-    // KEY_ZL           = BIT(8),       ///< ZL
-    // KEY_ZR           = BIT(9),       ///< ZR
-    // KEY_PLUS         = BIT(10),      ///< Plus
-    // KEY_MINUS        = BIT(11),      ///< Minus
-    // KEY_DLEFT        = BIT(12),      ///< D-Pad Left
-    // KEY_DUP          = BIT(13),      ///< D-Pad Up
-    // KEY_DRIGHT       = BIT(14),      ///< D-Pad Right
-    // KEY_DDOWN        = BIT(15), 
 
             printf(" ");
             // todo: eat this copypasta
@@ -195,10 +163,23 @@ int main(int argc, char **argv)
             currentLinePosition++;
         }
 
-        
-
         if (!running && (kDown & KEY_PLUS))
             break; // break in order to return to hbmenu
+
+        // Check for both stick clicks press to start/stop
+        if ((kDown & KEY_LSTICK) && (kDown & KEY_RSTICK)) {
+            if (running) {
+                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
+                printf("\nStopped reading input from P1\n");
+                running = false;
+                currentLinePosition = 0;
+
+            } else {
+                running = true;
+                printf(CONSOLE_WHITE CONSOLE_ESC(1m));
+                printf("Started reading input from P1\n");
+            }
+        }
 
         consoleUpdate(NULL);
     }
