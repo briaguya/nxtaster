@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     // 
     printf(CONSOLE_WHITE CONSOLE_ESC(1m));
     printf("nxTASter v0.0.1\n");
-    printf("Press LSTICK and RSTICK on P1 to start/stop reading inputs\n\n");
+    printf("Press LSTICK+RSTICK on P1 to start/stop reading inputs\n\n");
 
     // Main loop
     while (appletMainLoop())
