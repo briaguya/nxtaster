@@ -6,17 +6,17 @@ The goal of this will be to test input against nx-tas scripts
 2. Once that input is recieved, P1's controller is polled and the input formatted and output to the [deko console](https://github.com/switchbrew/switch-examples/tree/master/graphics/deko3d/deko_console)
 
 ## Testing with [nx-TAS](https://github.com/hamhub7/nx-TAS)
-1. Copy script1.txt to the nx-TAS scripts folder on your sd card
-2. Attach an nx-TAS virtual controller as P1
-3. Open nxTASter
-4. Use nx-TAS to [run script1.txt](https://github.com/hamhub7/nx-TAS#scripts)
+### Copy [script1.txt](/script1.txt) to the nx-TAS [scripts folder](https://github.com/hamhub7/nx-TAS#scripts) on your sd card
 
-TODO: video
+### Make sure the nx-TAS sysmodule is running
+![Opening sysmodule tesla overlay, enabling nx-TAS](/docs/turnonnxtas.gif)
 
-## What this hopefully will do in the future
-I think the basic idea will be:
-* load script into ram (maybe ui to pick a script to verify)
-* start a game loop, poll for input
-* todo: figure out a better way to know when we started input (right now we're [looking for ABXY getting pressed at the same time](https://github.com/briaguya/nxtaster/blob/3ef0fcf08b53d4e39632886c9e5c478d9595cfc7/source/main.c#L74-L89))
-* verify we're getting the input we expect from the script
-* output to log file (maybe UI to display it)
+### Attach an nx-TAS virtual controller as P1
+![Adding virtual controller on change grip/order screen](/docs/addcontroller.gif)
+
+### Open nxTASter and use nx-TAS to run [script1.txt](/script1.txt)
+![Opening nxTASter from homebrew menu, running script1 with nx-TAS virtual controller](/docs/runtest.gif)
+
+## What about script2.txt?
+[script2.txt](/script2.txt) appears to cause [nx-TAS](https://github.com/hamhub7/nx-TAS) to exit prematurely.
+![script2.gif](/docs/script2.gif)
