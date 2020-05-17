@@ -1,5 +1,5 @@
 # nxTASter
-The goal of this will be to test input against nx-tas scripts
+The goal of this is to test input from various TAS playback methods.
 
 ## What this currently does:
 1. When the application is loaded, it waits for LSTICK and RSTICK to be clicked in at the same time
@@ -8,7 +8,6 @@ The goal of this will be to test input against nx-tas scripts
 ## Testing with [nx-TAS](https://github.com/hamhub7/nx-TAS)
 * Copy [script1.txt](/script1.txt) to the nx-TAS [scripts folder](https://github.com/hamhub7/nx-TAS#scripts) on your sd card
 * Attach an nx-TAS virtual controller as P1
-![Adding virtual controller on change grip/order screen](/docs/addcontroller.gif)
 * Open nxTASter and use nx-TAS to run [script1.txt](/script1.txt)
 ![Opening nxTASter from homebrew menu, running script1 with nx-TAS virtual controller](/docs/runtest.gif)
 
